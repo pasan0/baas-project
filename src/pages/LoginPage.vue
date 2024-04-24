@@ -6,7 +6,7 @@
           <q-card class="my-card">
             <q-card-section class="text-dark">
               <center>
-                <a href="/"><img src="~/assets/kdjlogo.png" style="width:130px"></a>
+                <img src="../assets/OIG3..jpg" style="width:100px">
                 <br><p>Let us show the Easiest Way!</p>
               </center>
               <q-form ref="form" class="q-gutter-md" @submit="submitForm">
@@ -31,7 +31,7 @@
 
             <q-card-actions align="right">
 
-              <router-link style="text-decoration: none;" class="text-primary" to="/">Back to Home</router-link>
+              <!-- <router-link style="text-decoration: none;" class="text-primary" to="/">Back to Home</router-link> -->
             </q-card-actions>
           </q-card>
         </div>
@@ -61,7 +61,7 @@ const submitForm = async () => {
     await form.value.validate();
     // Form validation passed, continue with form submission logic
     await login(user);
-    router.push('/my');
+    router.push('/home');
   } catch (error) {
     // Handle validation errors
     console.error('Form validation failed:', error);
@@ -75,7 +75,7 @@ onMounted(() => {
   auth.onAuthStateChanged((user) => {
     if (user) {
       // User is logged in, redirect to the dashboard
-      router.push('/my');
+      router.push('/home');
     }
   });
 });

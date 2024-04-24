@@ -6,8 +6,8 @@
           <q-card class="my-card">
             <q-card-section class="text-dark">
               <center>
-                <a href="/"><img src="~/assets/kdjlogo.png" style="width:130px"></a>
-                <br><p>Let us show the Easiest Way!</p><small>Registration Form</small>
+               <img src="../assets/OIG3..jpg" style="width:100px">
+                <br><p>Welcome to <span style="font-weight: 800; color:black;"> PK Lanka Blogers !</span></p><small>Registration Form</small>
               </center>
 
         <q-form ref="form" class="q-gutter-md" @submit="submit">
@@ -33,7 +33,7 @@
             <q-separator />
 
             <q-card-actions align="right">
-              <router-link style="text-decoration: none;" class="text-primary" to="/">Back to Home</router-link>
+              <!-- <router-link style="text-decoration: none;" class="text-primary" to="/">Back to Home</router-link> -->
 
             </q-card-actions>
           </q-card>
@@ -78,7 +78,7 @@ import { onMounted } from 'vue';
         })
 
         // Redirect to the login page
-        router.push('/my');
+        router.push('/home');
 
       }
     } catch (error) {
@@ -98,7 +98,7 @@ onMounted(() => {
   auth.onAuthStateChanged((user) => {
     if (user) {
       // User is logged in, redirect to the dashboard
-      router.push('/my');
+      router.push('/home');
     }
   });
 });

@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { getDatabase } from "firebase/database"; // Import the getDatabase function
 import { LocalStorage } from 'quasar'
 
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAn5cQtf1LXC8EZEsPdlAmMUp10xTBe2-0",
@@ -17,6 +18,8 @@ const firebaseConfig = {
   appId: "1:1032858596285:web:7633580b08977238a4d8d4",
   measurementId: "G-GCQ3HZDLWY"
 };
+
+
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
