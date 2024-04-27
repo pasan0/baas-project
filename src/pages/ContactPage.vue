@@ -9,17 +9,17 @@
       <q-separator dark vertical />
 
       <router-link to="/home" class="text-white" style="text-decoration: none;" v-slot="{ navigate }">
-        <q-btn @click="navigate" stretch flat label="Home" />
+        <q-btn @click="navigate" stretch flat label="Home" icon="home" />
       </router-link>
       <q-separator dark vertical />
 
       <router-link to="/about" class="text-white" style="text-decoration: none;" v-slot="{ navigate }">
-        <q-btn @click="navigate" stretch flat label="About" />
+        <q-btn @click="navigate" stretch flat label="About" icon="error" />
       </router-link>
       <q-separator dark vertical />
 
       <router-link to="/contact" class="text-white" style="text-decoration: none;" v-slot="{ navigate }">
-        <q-btn @click="navigate" stretch flat label="Contact" />
+        <q-btn @click="navigate" stretch flat label="Contact" icon="call"/>
       </router-link>
 <q-separator dark vertical />
 
