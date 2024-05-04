@@ -1,0 +1,63 @@
+—————————————————————————————
+GitHub Action - YML Code - To Deploy a Quasar Project
+——————————————————————————————
+name: Build & Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 👨‍💻 Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: 🚚 Upgrade NPM
+        run: npm install -g npm@8.19.4
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+
+      - name: 💥 Install Dependencies
+        # run: npm ci --force
+        run: npm install --legacy-peer-deps
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: 🔨 Build Project
+        run: npm run build
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.KDJ_APP_NETWORK_CYBER_SSH_SECRET }}
+          ARGS: "-rltgoDzvO --delete --exclude '.htaccess, .user.ini'"
+          SOURCE: "dist/spa/"
+          REMOTE_HOST: ${{ secrets.KDJ_APP_NETWORK_CYBER_SSH_IP }}
+          REMOTE_USER: ${{ secrets.KDJ_APP_NETWORK_CYBER_USERNAME }}
+          TARGET: ${{ secrets.SITE_LOCATION }}
+          EXCLUDE: "/dist/, /node_modules/, /api/"
+          SCRIPT_AFTER: |
+            whoami
+            ls -al
+            chmod 755 /home/kdj.lk/public_html
+            echo "<ifModule mod_rewrite.c>" >> .htaccess
+            echo "    RewriteEngine On" >> .htaccess
+            echo "    RewriteBase /" >> .htaccess
+            echo "    RewriteCond %{REQUEST_FILENAME} !-f" >> .htaccess
+            echo "    RewriteCond %{REQUEST_FILENAME} !-d" >> .htaccess
+            echo "    RewriteRule (.*) /index.html [QSA,L]" >> .htaccess
+            echo "</ifModule>" >> .htaccess
